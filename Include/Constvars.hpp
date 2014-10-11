@@ -28,8 +28,8 @@ const char TKORS		= char(197);
 
 
 // Definera fönstrets storlek
-const int COLUMNS	= 80;
-const int ROWS		= 24;
+int COLUMNS	= get_console_width();
+int ROWS		= get_console_height()-1;
 
 //Olika knappar		Piltangenter							F1 - F4
 const char CHUP 		= char(72); const char CHUP1 		= char(60);

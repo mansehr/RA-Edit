@@ -268,3 +268,15 @@ void textcolor(short kolor)
 {
     kolorTekstu = kolor % 8;
 }
+
+int get_console_width()
+{
+    if(!zainicjowane) inicjuj();
+    return getmaxx(aktywneOkno);
+}
+
+int get_console_height()
+{
+    if(!zainicjowane) inicjuj();
+    return getmaxy(aktywneOkno);
+}

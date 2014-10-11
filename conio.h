@@ -86,6 +86,9 @@
 #define getche CURSgetche
 
 
+int last_x = 1;
+int last_y = 1;
+
 void inicjuj();
 
 class Startuj   // konstruktor i destruktor klasy beda odpowiedzalni
@@ -157,10 +160,38 @@ int simple_strlen(char* str)
 	return p-str;
 }
 
+int gotoxy(int x, int y);
+
 void cputs(char* str)
 {
-	waddstr(aktywneOkno, str);
-	wrefresh(aktywneOkno);
+    int beginning_x = last_x;
+
+    while (*str != '\0')
+    {
+        if (*str == '\n')
+        {
+            gotoxy(last_x, last_y+1);
+        }
+        else if (*str == '\r')
+        {
+            gotoxy(beginning_x, last_y);
+        }
+        else if (*str == '\b')
+        {
+            gotoxy(last_x-1, last_y);
+        }
+        else
+        {
+            char buf[] = {*str, '\0'};
+            waddstr(aktywneOkno, buf);
+
+            gotoxy(last_x+1, last_y);
+        }
+
+        str++;
+    }
+
+    wrefresh(aktywneOkno);
 }
 
 char* cgets(char* str)
@@ -275,6 +306,8 @@ int CURSgetche()
 
 int gotoxy(int x, int y)
 {
+        last_x = x;
+        last_y = y;
 	if(!zainicjowane) inicjuj();
 	wmove(aktywneOkno, y - 1, x - 1);
 	return 0;

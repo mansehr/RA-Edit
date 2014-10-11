@@ -46,7 +46,8 @@ void ritaRam(int rows = 23)		// Rita antalet rader från toppen är som standard 2
 			}
 
 			ram[counter++] = RUCORNER;
-			ram[counter++] = '\r\n';
+			ram[counter++] = '\r';
+			ram[counter++] = '\n';
 		}
 		// Om det är sista raden ska något spec skrivas ut
 		else if (i==MAX_ROWS)
@@ -59,7 +60,8 @@ void ritaRam(int rows = 23)		// Rita antalet rader från toppen är som standard 2
 			}
 
 			ram[counter++] = RBCORNER;
-			ram[counter++] = '\r\n';
+			ram[counter++] = '\r';
+			ram[counter++] = '\n';
 		}
 		// Om det är en "vanlig rad skriver vi ut detta"
 		else
@@ -72,7 +74,8 @@ void ritaRam(int rows = 23)		// Rita antalet rader från toppen är som standard 2
 			}
 
 			ram[counter++] = LODRAT;
-			ram[counter++] = '\r\n';
+			ram[counter++] = '\r';
+			ram[counter++] = '\n';
 		}
 	}
 	// Här slutar vektorn

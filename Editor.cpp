@@ -35,7 +35,7 @@ int main ()
 		switch(progStatus)						// Vad ska programmet göra
 		{
 			case Init:								// Starta programmet
-				system("cls");						// Rensa skärmen
+				clrscr();						// Rensa skärmen
 				ritaRam();							// Rita ramen
 				initMenu();							// Initiera menyn
 				menuBar.drawGrund();				// Rita upp meny knapparna
@@ -222,7 +222,7 @@ void oppnaString ()
 void quit()
 {
 	progStatus = Quit;							// Avsluta
-	system("cls");									// Rensa skärmen
+	clrscr();									// Rensa skärmen
 }
 
 void logKey(char key) {

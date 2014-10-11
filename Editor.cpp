@@ -1,9 +1,13 @@
-#define __VERSION__ 0.956
+#define TO_STRING_HELPER(X) #X
+#define TO_STRING(X) TO_STRING_HELPER(X)
+
+#define __VERSION__ 0.957
+#define __VERSION_STR__ TO_STRING(__VERSION__)
 
 #ifdef __linux__
-#include "conio.h"                                                                       //Inkluderar viktiga huvudbibliotek
+#include "conio.h"                            //Inkluderar viktiga huvudbibliotek
 #else
-#include "conio_win.h"                                                                       //Inkluderar viktiga huvudbibliotek
+#include "conio_win.h"                        //Inkluderar viktiga huvudbibliotek
 #endif
 #include "extra.h"
 #include <fstream>
@@ -156,7 +160,7 @@ void menuAction()
 		hjalp.printLine(2,"och Rickard Lindberg under jullovet 2002.");
 		hjalp.printLine(4,"Ni når oss via mail: ");
 		hjalp.printLine(5,"ande_vega@hotmail.com & webmaster@ricki.nu");
-		hjalp.printLine(7,"Version: Beta 0.956");
+		hjalp.printLine(7,"Version: Beta " __VERSION_STR__);
 
 		getch();										// Vänta på knapptryckning
 		texten.draw(ALL);							//Tar bort fönstret

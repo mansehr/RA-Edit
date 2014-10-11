@@ -157,8 +157,9 @@ void TextEdit::draw(DrawRow whatToDraw)
 	{
 		textcolor(WHITE);
 		textbackground(BLACK);
-		char tom[MAX_BREDD];
+		char tom[MAX_BREDD+1];
 		String tempString;
+		
 		for(int i = visualStartRow; i < visualStartRow+RADER-1; i++)
 		{
 			tempString += "\n\r";

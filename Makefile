@@ -1,2 +1,2 @@
-a.out: Editor.cpp *.h Include/*.hpp Include/*.cpp
+a.out: Editor.cpp *.h Include/*.hpp
 	g++ Editor.cpp -w -lncurses

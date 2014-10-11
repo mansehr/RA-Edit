@@ -54,7 +54,7 @@ class Popup
 		{
 			gotoxy(left+(cols/2)-strlen(text)/2,top);
 			cputs(text);
-			gotoxy(80,25);
+			gotoxy(COLUMNS,ROWS+1);
 		}
 
 		//----------------------------------------------------
@@ -70,7 +70,7 @@ class Popup
 			activeCol = left+2+strlen(text);
 
 			cputs(text);
-			gotoxy(80,25);
+			gotoxy(COLUMNS,ROWS+1);
 		}
 };
 

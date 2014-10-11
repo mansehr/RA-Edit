@@ -11,14 +11,14 @@
 
 #include <cstring>
 
-void ritaRam(int rows = 23)		// Rita antalet rader från toppen är som standard 23
+void ritaRam(int rows = ROWS-1)		// Rita antalet rader från toppen är som standard höjd minus 1
 {											// Går att skicka egna värden...
 	// Definera fönstrets storlek
-	const int COLUMNS	 = 78;
-	const int MAX_ROWS = 23;
+	const int MAX_COLUMNS = COLUMNS-2;
+	const int MAX_ROWS = ROWS-1;
 
 	// Definera ram-vektorn, titeln och räknaren
-	char ram[1 + (COLUMNS+4)*MAX_ROWS];
+	char ram[1 + (MAX_COLUMNS+4)*MAX_ROWS];
 	char * titel = " RA Editor - Beta " __VERSION_STR__ " ";
 	int counter = 0;
 
@@ -30,12 +30,12 @@ void ritaRam(int rows = 23)		// Rita antalet rader från toppen är som standard 2
 		{
 			ram[counter++] = LUCORNER;
 
-			for (unsigned int j=1;j<=COLUMNS;j++)
+			for (unsigned int j=1;j<=MAX_COLUMNS;j++)
 			{
 				ram[counter++] = VAGRAT;
 
 				// Räkna ut positionen där rubriken ska börja skrivas ut
-				if (j==((COLUMNS/2)-(strlen(titel)/2)))
+				if (j==((MAX_COLUMNS/2)-(strlen(titel)/2)))
 				{
 					// Printa ut rubriken
 					for (unsigned int k=0;k<strlen(titel);k++)
@@ -56,7 +56,7 @@ void ritaRam(int rows = 23)		// Rita antalet rader från toppen är som standard 2
 		{
 			ram[counter] = LBCORNER; counter++;
 
-			for (int j=1;j<=COLUMNS;j++)
+			for (int j=1;j<=MAX_COLUMNS;j++)
 			{
 				ram[counter++] = VAGRAT;
 			}
@@ -70,7 +70,7 @@ void ritaRam(int rows = 23)		// Rita antalet rader från toppen är som standard 2
 		{
 			ram[counter++] = LODRAT;
 
-			for (int j=1;j<=COLUMNS;j++)
+			for (int j=1;j<=MAX_COLUMNS;j++)
 			{
 				ram[counter++] = ' ';
 			}

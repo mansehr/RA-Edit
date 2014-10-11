@@ -331,7 +331,7 @@ void TextEdit::printRowColumn()
 //Skriver ut rad och column på den gråa raden längst ner
 	textcolor(BLACK);
 	textbackground(7);
-	gotoxy(4,25);
+	gotoxy(4,ROWS+1);
 	char chColums[18], chRows[18];
 	itoa(activeRow+1,chRows, 10);					// Gör om inten till en char vektor
 	itoa(row[activeRow]->getLocOnRow()+1,chColums, 10);

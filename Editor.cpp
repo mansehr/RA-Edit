@@ -9,9 +9,9 @@
 using namespace std;
 
 #include "Include/Constvars.hpp"				//Inkluderar hemma-gjorda bibliotek
-#include "Include/huvudram.cpp"
+#include "Include/huvudram.hpp"
 #include "Include/MenuBar.hpp"
-#include "Include/EditorMenu.cpp"
+#include "Include/EditorMenu.hpp"
 #include "Include/Ruta.hpp"
 #include "Include/String.hpp"
 #include "Include/TextField.hpp"
@@ -225,12 +225,20 @@ void quit()
 	clrscr();									// Rensa skärmen
 }
 
+void logKey(char key) {
+	gotoxy(20,1);
+	cout << key << " : " << (int)key << "   ";
+}
+
 //----------------------------------------------------------
 //	Funktionen som körs när TextEdit objektet är aktivt
 //----------------------------------------------------------
 void runProgram()
 {
 	char key = getch();							// Vänta på knapptryckning från tangentbordet
+	
+	
+	logKey(key);
 
 	switch(key)
 	{

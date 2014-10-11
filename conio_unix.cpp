@@ -53,9 +53,6 @@
 #include <ncurses.h>
 #endif
 
-#undef getch
-#define getch CURSgetch
-
 #ifndef __CONIO_H
 #define __CONIO_H
 #endif
@@ -171,7 +168,7 @@ int gotoxy(int x, int y)
     return 0;
 }
 
-void cputs(char* str)
+void cputs(const char* str)
 {
     int beginning_x = last_x;
 
@@ -282,6 +279,6 @@ int get_console_height()
     return getmaxy(aktywneOkno);
 }
 
-void setTitle(char*)
+void setTitle(const char*)
 {
 }

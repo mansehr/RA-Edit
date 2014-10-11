@@ -9,6 +9,8 @@
 //																			 //
 ////////////////////////////////////////////////////////////
 
+#include <cstring>
+
 void ritaRam(int rows = 23)		// Rita antalet rader från toppen är som standard 23
 {											// Går att skicka egna värden...
 	// Definera fönstrets storlek

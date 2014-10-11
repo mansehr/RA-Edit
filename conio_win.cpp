@@ -1,13 +1,8 @@
 
 #include <windows.h>
 #include <stdio.h>
-#include <iostream>
+#include "conio.h"
 
-
-#define DARKGRAY	0x7
-#define WHITE 		0xF
-#define BLACK		0x0
-#define BLUE		0x9
 
 /*
 bit 0 - foreground blue
@@ -26,18 +21,30 @@ void setColor(int color) {
 	lastColor = color;
 }
 
-void textcolor(int textcolor) {
+void setTitle(char* str) {
+	SetConsoleTitle(str);
+}
+
+void getWindowSize() {
+	CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
+	HANDLE hConsoleOut = GetStdHandle( STD_OUTPUT_HANDLE );
+	GetConsoleScreenBufferInfo( hConsoleOut, &csbiInfo );
+	//printf("%i\n",csbiInfo.dwSize.X);
+	//printf("%i\n\n",csbiInfo.dwSize.Y);
+}
+
+void textcolor(short textcolor) {
 	int color = (lastColor & 0xF0) | textcolor;
 	setColor(color);
 }
 
-void textbackground(int bgcolor) {
+void textbackground(short bgcolor) {
 	int color = (lastColor & 0xF) | (bgcolor << 4);
 	setColor(color);
 }
 
 int last_x, last_y;
-void gotoxy(int x, int y) {
+int gotoxy(int x, int y) {
 	if(x < 1) {
 		x = 1;
 	}
@@ -50,7 +57,7 @@ void gotoxy(int x, int y) {
  	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
  	last_x = x;
  	last_y = y;
- 	return;
+ 	return 0;
 }
 
 void clrscr() {

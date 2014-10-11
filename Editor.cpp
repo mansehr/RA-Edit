@@ -50,15 +50,15 @@ int main ()
 				//	Rita upp den nedre baren
 				//-------------------------------------------------------
 				{
-					char bottom[80];
+					char bottom[COLUMNS];
 					int i = 0;
-					for (;i < 79; i++)
+					for (;i < COLUMNS-1; i++)
 					{
 						bottom[i] = ' ';
 					}
 					bottom[i] = '\0';
 					textbackground(7);
-					gotoxy(1,25);
+					gotoxy(1,ROWS+1);
 					cputs(bottom);
 				}
 				texten.draw(ALL);					// Rensar text delen.
@@ -68,7 +68,7 @@ int main ()
 				runProgram();
 			break;
 			case Menu:								// Menyn är aktiv
-				gotoxy(80,25);						//	När man är inne i menyn placerar vi pekaren längst ner i högra hörnet
+				gotoxy(COLUMNS,ROWS+1);						//	När man är inne i menyn placerar vi pekaren längst ner i högra hörnet
 				char key = getch();				// Vänta på knapptryckning
 				if(key!=0)							// Ingen special knapp
 				{

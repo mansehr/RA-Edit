@@ -10,6 +10,8 @@
 #ifndef __ADObjekt.hpp__
 #define __ADObjekt.hpp__
 
+#include <cstring>
+
 enum Status { Null = 0, NotPressable, Hoover, Active, Pressed };
 
 class Objekt

@@ -25,12 +25,21 @@ void setTitle(const char* str) {
 	SetConsoleTitle(str);
 }
 
-void getWindowSize() {
+SMALL_RECT getWindowSize() {
 	CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
 	HANDLE hConsoleOut = GetStdHandle( STD_OUTPUT_HANDLE );
 	GetConsoleScreenBufferInfo( hConsoleOut, &csbiInfo );
-	//printf("%i\n",csbiInfo.dwSize.X);
-	//printf("%i\n\n",csbiInfo.dwSize.Y);
+	return csbiInfo.srWindow;
+}
+
+int get_console_width() {
+	SMALL_RECT rect =  getWindowSize();
+	return rect.Right - rect.Left;
+}
+
+int get_console_height() {
+	SMALL_RECT rect =  getWindowSize();
+	return rect.Bottom - rect.Top;
 }
 
 void textcolor(short textcolor) {

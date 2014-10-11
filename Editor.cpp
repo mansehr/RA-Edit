@@ -11,7 +11,6 @@
 #endif
 #include "extra.h"
 #include <fstream>
-#include <iostream>
 #include <string>
 #include <vector>
 using namespace std;
@@ -235,7 +234,9 @@ void quit()
 
 void logKey(char key) {
 	gotoxy(20,1);
-	cout << key << " : " << (int)key << "   ";
+	char buf[64];
+	sprintf(buf, "%c : %d  ", key , (int)key);
+	cputs(buf);
 }
 
 //----------------------------------------------------------

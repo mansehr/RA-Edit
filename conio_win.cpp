@@ -1,13 +1,8 @@
 
 #include <windows.h>
 #include <stdio.h>
-#include <iostream>
+#include "conio.h"
 
-
-#define DARKGRAY	0x7
-#define WHITE 		0xF
-#define BLACK		0x0
-#define BLUE		0x9
 
 /*
 bit 0 - foreground blue
@@ -26,18 +21,30 @@ void setColor(int color) {
 	lastColor = color;
 }
 
-void textcolor(int textcolor) {
+void setTitle(char* str) {
+	SetConsoleTitle(str);
+}
+
+void getWindowSize() {
+	CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
+	HANDLE hConsoleOut = GetStdHandle( STD_OUTPUT_HANDLE );
+	GetConsoleScreenBufferInfo( hConsoleOut, &csbiInfo );
+	//printf("%i\n",csbiInfo.dwSize.X);
+	//printf("%i\n\n",csbiInfo.dwSize.Y);
+}
+
+void textcolor(short textcolor) {
 	int color = (lastColor & 0xF0) | textcolor;
 	setColor(color);
 }
 
-void textbackground(int bgcolor) {
+void textbackground(short bgcolor) {
 	int color = (lastColor & 0xF) | (bgcolor << 4);
 	setColor(color);
 }
 
-int lastX, lastY;
-void gotoxy(int x, int y) {
+int last_x, last_y;
+int gotoxy(int x, int y) {
 	if(x < 1) {
 		x = 1;
 	}
@@ -48,9 +55,9 @@ void gotoxy(int x, int y) {
 	COORD coord = {x-1, y-1};
  	//Set the position
  	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
- 	lastX = x;
- 	lastY = y;
- 	return;
+ 	last_x = x;
+ 	last_y = y;
+ 	return 0;
 }
 
 void clrscr() {
@@ -70,24 +77,38 @@ void clrscr() {
     SetConsoleCursorPosition(console, topLeft);
 }
 
-void cputs(char* out) {
-	char ch;
-	do {
-		ch = *out;
-		if(ch == '\n') {
-			gotoxy(lastX, lastY+1);
-		} else if(ch == '\r' || ch == '\b') {
-			// ignore
-		} else if(ch != '\0') {
-			printf("%c", ch);
-		}
-		++out;
-	} while(ch != '\0');
+void cputs(char* str)
+{
+    int beginning_x = last_x;
+
+    while (*str != '\0')
+    {
+        if (*str == '\n')
+        {
+            gotoxy(last_x, last_y+1);
+        }
+        else if (*str == '\r')
+        {
+            gotoxy(beginning_x, last_y);
+        }
+        else if (*str == '\b')
+        {
+            gotoxy(last_x-1, last_y);
+        }
+        else
+        {
+            printf("%c", *str);
+
+            gotoxy(last_x+1, last_y);
+        }
+
+        str++;
+    }
 }
 
 bool hasSpecialChar = false;
 char specialCharNum = '\0';
-CHAR getch (VOID)
+CHAR CURSgetch (VOID)
 {
 	if(hasSpecialChar) {
 		hasSpecialChar = false;
@@ -101,9 +122,9 @@ CHAR getch (VOID)
 
   while(ReadConsoleInputA (hStdin, &irInputRecord, 1, &dwEventsRead)) /* Read key press */
     if (irInputRecord.EventType == KEY_EVENT
-	/*&&irInputRecord.Event.KeyEvent.wVirtualKeyCode != VK_SHIFT
+	&&irInputRecord.Event.KeyEvent.wVirtualKeyCode != VK_SHIFT
 	&&irInputRecord.Event.KeyEvent.wVirtualKeyCode != VK_MENU
-	&&irInputRecord.Event.KeyEvent.wVirtualKeyCode != VK_CONTROL*/)
+	&&irInputRecord.Event.KeyEvent.wVirtualKeyCode != VK_CONTROL)
     {
       cChar = irInputRecord.Event.KeyEvent.uChar.AsciiChar;
       if(cChar == 0) {

@@ -9,7 +9,9 @@
 //																			 //
 ////////////////////////////////////////////////////////////
 
-void ritaRam(int rows = ROWS-1)		// Rita antalet rader från toppen är som standard 23
+#include <cstring>
+
+void ritaRam(int rows = ROWS-1)		// Rita antalet rader från toppen är som standard höjd minus 1
 {											// Går att skicka egna värden...
 	// Definera fönstrets storlek
 	const int MAX_COLUMNS = COLUMNS-2;

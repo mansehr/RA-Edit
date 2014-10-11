@@ -4,11 +4,7 @@
 #define __VERSION__ 0.957
 #define __VERSION_STR__ TO_STRING(__VERSION__)
 
-#ifdef __linux__
 #include "conio.h"                            //Inkluderar viktiga huvudbibliotek
-#else
-#include "conio_win.h"                        //Inkluderar viktiga huvudbibliotek
-#endif
 #include "extra.h"
 #include <fstream>
 #include <string>
@@ -37,6 +33,7 @@ TextEdit texten;
 
 int main ()
 {
+	setTitle("RAEditor " __VERSION_STR__);
 	while(progStatus != Quit)					//Hoppar ur lopen om progStatus == quit
 	{
 		switch(progStatus)						// Vad ska programmet göra

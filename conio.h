@@ -30,7 +30,7 @@
 
 void clrscr();
 
-void cputs(char*);
+void cputs(const char*);
 
 char getch();
 
@@ -41,5 +41,5 @@ void textbackground(short);
 void textcolor(short);
 
 // New Methods, not standard conio.h
-void setTitle(char*);
+void setTitle(const char*);
 

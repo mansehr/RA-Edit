@@ -7,8 +7,8 @@
 			//				Senast ändrad:	2003,01,27						//
 			//																		//
 			////////////////////////////////////////////////////////
-#ifndef __ADObjekt.hpp__
-#define __ADObjekt.hpp__
+#ifndef __ADObjekthpp__
+#define __ADObjekthpp__
 
 #include <cstring>
 
@@ -23,7 +23,7 @@ class Objekt
 		int 	getLeft		() const { return left;			}
 		int 	getRight		() const { return right;		}
 		Status getStatus	() const { return thisStatus;	}
-		char* getText		() const { return text;			}
+		const char* getText		() const { return text;			}
 		int 	getTextWidth() const { return textWidth;	}
 		int 	getTop		() const { return top;			}
 		int 	getWidth		() const { return width;		}
@@ -32,7 +32,7 @@ class Objekt
 		void 	setLeft 		(int initLeft) 	{ left = initLeft; 			}
 		void 	setRight 	(int initRight) 	{ right = initRight;			}
 		void 	setStatus 	(Status initStatus){thisStatus = initStatus;	}
-		void 	setText 		(char* initText);
+		void 	setText 		(const char* initText);
 		void 	setTextWidth(int initWidth) 	{ textWidth = initWidth;	}
 		void 	setTop 		(int initTop) 		{ top = initTop;				}
 		void 	setWidth 	(int initWidth) 	{ width = initWidth;			}
@@ -42,7 +42,7 @@ class Objekt
 		int 	height;
 		int 	left;
 		int 	right;
-		char*	text;
+		const char*	text;
 		int 	textWidth;
 		int 	top;
 		int 	width;
@@ -59,7 +59,7 @@ Objekt::Objekt()
 	right 		= left + width;
 }
 
-void Objekt::setText(char* initText)
+void Objekt::setText(const char* initText)
 {
 	text 			= initText;
 	textWidth 	= strlen(text);

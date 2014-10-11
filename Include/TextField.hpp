@@ -8,8 +8,8 @@
 //						 lätt att redigera.							 //
 //																			 //
 ////////////////////////////////////////////////////////////
-#ifndef __TextField.hpp__
-#define __TextField.hpp__
+#ifndef __TextFieldhpp__
+#define __TextFieldhpp__
 
 #include "TextObjekt.hpp"
 #include "Objekt.hpp"

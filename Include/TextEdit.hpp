@@ -9,8 +9,8 @@
 			//			Innehåll: Klasser till editor programmet		//
 			//																		//
 			////////////////////////////////////////////////////////
-#ifndef __ADTextEdit.hpp__
-#define __ADTextEdit.hpp__
+#ifndef __ADTextEdithpp__
+#define __ADTextEdithpp__
 
 #include "String.hpp"
 #include "TextObjekt.hpp"

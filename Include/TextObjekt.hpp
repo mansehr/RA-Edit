@@ -13,8 +13,8 @@
 			//						 och textArea klasser					//
 			//																		//
 			////////////////////////////////////////////////////////
-#ifndef __TextObjekt.hpp__
-#define __TextObjekt.hpp__
+#ifndef __TextObjekthpp__
+#define __TextObjekthpp__
 
 #include "String.hpp"
 

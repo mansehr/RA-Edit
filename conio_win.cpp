@@ -21,7 +21,7 @@ void setColor(int color) {
 	lastColor = color;
 }
 
-void setTitle(char* str) {
+void setTitle(const char* str) {
 	SetConsoleTitle(str);
 }
 
@@ -77,7 +77,7 @@ void clrscr() {
     SetConsoleCursorPosition(console, topLeft);
 }
 
-void cputs(char* str)
+void cputs(const char* str)
 {
     int beginning_x = last_x;
 

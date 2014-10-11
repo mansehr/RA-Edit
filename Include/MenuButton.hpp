@@ -7,8 +7,8 @@
 			//			Senast ändrad:	2002,02,12							//
 			//																		//
 			////////////////////////////////////////////////////////
-#ifndef __MenuButton.hpp__
-#define __MenuButton.hpp__
+#ifndef __MenuButtonhpp__
+#define __MenuButtonhpp__
 
 #include "Objekt.hpp"
 
@@ -16,7 +16,7 @@ class MenuButton : public Objekt
 {
 	public:
 		MenuButton() : Objekt() {}
-		MenuButton(char* initString)
+		MenuButton(const char* initString)
 		{
 			setText(initString);
 			left = 1;

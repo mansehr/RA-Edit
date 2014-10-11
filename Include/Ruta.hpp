@@ -50,7 +50,7 @@ class Popup
 		//----------------------------------------------------
 		//	Skriver ut en centrerad rubrik på första raden
 		//----------------------------------------------------
-		void printRubb(char * text)
+		void printRubb(const char * text)
 		{
 			gotoxy(left+(cols/2)-strlen(text)/2,top);
 			cputs(text);
@@ -60,7 +60,7 @@ class Popup
 		//----------------------------------------------------
 		//	Skriver ut en text på rad X
 		//----------------------------------------------------
-		void printLine(int rad, char * text)
+		void printLine(int rad, const char * text)
 		{
 			textbackground(1);	// Blå bg
 			textcolor(15);			// Vit text

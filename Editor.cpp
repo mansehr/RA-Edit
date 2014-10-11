@@ -1,6 +1,10 @@
 #define __VERSION__ 0.956
 
+#ifdef __linux__
 #include "conio.h"                                                                       //Inkluderar viktiga huvudbibliotek
+#else
+#include "conio_win.h"                                                                       //Inkluderar viktiga huvudbibliotek
+#endif
 #include "extra.h"
 #include <fstream>
 #include <iostream>

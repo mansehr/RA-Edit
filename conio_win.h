@@ -36,11 +36,20 @@ void textbackground(int bgcolor) {
 	setColor(color);
 }
 
+int lastX, lastY;
 void gotoxy(int x, int y) {
+	if(x < 1) {
+		x = 1;
+	}
+	if(y < 1) {
+		y = 1;
+	}
 	//Initialize the coordinates
 	COORD coord = {x-1, y-1};
  	//Set the position
  	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+ 	lastX = x;
+ 	lastY = y;
  	return;
 }
 
@@ -49,7 +58,18 @@ void clearscreen() {
 }
 
 void cputs(char* out) {
-	std::cout << out;
+	char ch;
+	do {
+		ch = *out;
+		if(ch == '\n') {
+			gotoxy(lastX, lastY+1);
+		} else if(ch == '\r' || ch == '\b') {
+			// ignore
+		} else {
+			printf("%c", ch);
+		}
+		++out;
+	} while(ch != '\0');
 }
 
 bool hasSpecialChar = false;

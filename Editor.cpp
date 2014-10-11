@@ -1,6 +1,7 @@
 #define __VERSION__ 0.956
 
-#include <conio>									//Inkluderar viktiga huvudbibliotek
+#include "conio.h"                                                                       //Inkluderar viktiga huvudbibliotek
+#include "extra.h"
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -8,7 +9,7 @@
 using namespace std;
 
 #include "Include/Constvars.hpp"				//Inkluderar hemma-gjorda bibliotek
-#include "Include/Huvudram.cpp"
+#include "Include/huvudram.cpp"
 #include "Include/MenuBar.hpp"
 #include "Include/EditorMenu.cpp"
 #include "Include/Ruta.hpp"
@@ -27,7 +28,7 @@ ProgStatus progStatus = Init;
 
 TextEdit texten;
 
-void main ()
+int main ()
 {
 	while(progStatus != Quit)					//Hoppar ur lopen om progStatus == quit
 	{
@@ -82,6 +83,7 @@ void main ()
 		}
 		texten.showPointer();					// Placera ut pekaren
 	}
+        return 0;
 }
 
 //----------------------------------------------------------

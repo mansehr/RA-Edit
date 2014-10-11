@@ -226,7 +226,19 @@ int CURSgetch()
         znak = znakSpecjalny;
         znakSpecjalny = -1;
 
-        return znak-265+59;
+        switch (znak)
+        {
+            case KEY_DOWN:
+                return 80;
+            case KEY_UP:
+                return 72;
+            case KEY_LEFT:
+                return 75;
+            case KEY_RIGHT:
+                return 77;
+            default:
+                return znak-265+59;
+        }
     }
 
     znak = wgetch(aktywneOkno);
@@ -237,7 +249,14 @@ int CURSgetch()
         return 0;
     }
 
-    return znak;
+    if (znak == 10)
+    {
+        return 13;
+    }
+    else
+    {
+        return znak;
+    }
 }
 
 void textbackground(short kolor)

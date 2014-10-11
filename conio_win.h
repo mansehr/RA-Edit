@@ -65,7 +65,7 @@ void cputs(char* out) {
 			gotoxy(lastX, lastY+1);
 		} else if(ch == '\r' || ch == '\b') {
 			// ignore
-		} else {
+		} else if(ch != '\0') {
 			printf("%c", ch);
 		}
 		++out;

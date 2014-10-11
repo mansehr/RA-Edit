@@ -9,9 +9,9 @@
 using namespace std;
 
 #include "Include/Constvars.hpp"				//Inkluderar hemma-gjorda bibliotek
-#include "Include/huvudram.cpp"
+#include "Include/huvudram.hpp"
 #include "Include/MenuBar.hpp"
-#include "Include/EditorMenu.cpp"
+#include "Include/EditorMenu.hpp"
 #include "Include/Ruta.hpp"
 #include "Include/String.hpp"
 #include "Include/TextField.hpp"

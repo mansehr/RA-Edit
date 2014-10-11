@@ -30,7 +30,7 @@
 
 void clrscr();
 
-void cputs(char*);
+void cputs(const char*);
 
 #undef getch
 #define getch CURSgetch
@@ -44,7 +44,7 @@ void textbackground(short);
 void textcolor(short);
 
 // New Methods, not standard conio.h
-void setTitle(char*);
+void setTitle(const char*);
 
 int get_console_width();
 

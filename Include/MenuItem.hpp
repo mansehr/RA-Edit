@@ -8,8 +8,8 @@
 			//																		//
 			////////////////////////////////////////////////////////
 
-#ifndef __MenuItem.hpp__
-#define __MenuItem.hpp__
+#ifndef __MenuItemhpp__
+#define __MenuItemhpp__
 
 #include "Constvars.hpp"
 #include "Objekt.hpp"
@@ -18,7 +18,7 @@ class MenuItem : public Objekt
 {
 	public:
 		MenuItem() {;}
-		MenuItem (char *initText) {setText(initText);}
+		MenuItem (const char *initText) {setText(initText);}
 
 		int getIndrag() const {return indrag;}
 

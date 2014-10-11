@@ -7,8 +7,8 @@
 			//			Senast ändrad:	2002,12,05					//
 			//														//
 			//////////////////////////////////////////////////////////
-#ifndef __ADMenuBar.hpp__
-#define __ADMenuBar.hpp__
+#ifndef __ADMenuBarhpp__
+#define __ADMenuBarhpp__
 
 #include "Constvars.hpp"
 #include "Menu.hpp"

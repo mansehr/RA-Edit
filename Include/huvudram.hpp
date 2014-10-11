@@ -19,7 +19,7 @@ void ritaRam(int rows = ROWS-1)		// Rita antalet rader från toppen är som standa
 
 	// Definera ram-vektorn, titeln och räknaren
 	char ram[1 + (MAX_COLUMNS+4)*MAX_ROWS];
-	char * titel = " RA Editor - Beta " __VERSION_STR__ " ";
+	const char * titel = " RA Editor - Beta " __RA_VERSION_STR__ " ";
 	int counter = 0;
 
 	// Loopa igenom varje rad

@@ -7,8 +7,8 @@
 			//			Senast ändrad:	2002,12,05							//
 			//																		//
 			////////////////////////////////////////////////////////
-#ifndef __ADMenu.hpp__
-#define __ADMenu.hpp__
+#ifndef __ADMenuhpp__
+#define __ADMenuhpp__
 
 #include "Constvars.hpp"
 #include "MenuItem.hpp"
@@ -19,7 +19,7 @@ class Menu : public MenuButton
 {
 	public:
 		Menu ();
-		Menu (char *initText);
+		Menu (const char *initText);
 
 		void 	add 					(MenuItem &initMenuItem);
 		int 	biggest 				(int a, int b);
@@ -72,7 +72,7 @@ Menu::Menu()
 }
 
 
-Menu::Menu( char *initText)
+Menu::Menu(const char *initText)
 : MenuButton(initText)
 {
 	Menu();

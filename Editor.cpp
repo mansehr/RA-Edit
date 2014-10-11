@@ -1,8 +1,8 @@
 #define TO_STRING_HELPER(X) #X
 #define TO_STRING(X) TO_STRING_HELPER(X)
 
-#define __VERSION__ 0.957
-#define __VERSION_STR__ TO_STRING(__VERSION__)
+#define __RA_VERSION__ 0.958
+#define __RA_VERSION_STR__ TO_STRING(__RA_VERSION__)
 
 #include "conio.h"                            //Inkluderar viktiga huvudbibliotek
 #include "extra.h"
@@ -33,7 +33,7 @@ TextEdit texten;
 
 int main ()
 {
-	setTitle("RAEditor " __VERSION_STR__);
+	setTitle("RAEditor " __RA_VERSION_STR__);
 	while(progStatus != Quit)					//Hoppar ur lopen om progStatus == quit
 	{
 		switch(progStatus)						// Vad ska programmet göra
@@ -156,7 +156,7 @@ void menuAction()
 		hjalp.printLine(2,"och Rickard Lindberg under jullovet 2002.");
 		hjalp.printLine(4,"Ni når oss via mail: ");
 		hjalp.printLine(5,"ande_vega@hotmail.com & webmaster@ricki.nu");
-		hjalp.printLine(7,"Version: Beta " __VERSION_STR__);
+		hjalp.printLine(7,"Version: Beta " __RA_VERSION_STR__);
 
 		getch();										// Vänta på knapptryckning
 		texten.draw(ALL);							//Tar bort fönstret

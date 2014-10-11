@@ -77,14 +77,8 @@
 
 // -------------------------------- globalne ------------------
 
-//int (* wsk_f)(void) = getch;
-
 #undef getch
 #define getch CURSgetch
-
-#undef getche
-#define getche CURSgetche
-
 
 int last_x = 1;
 int last_y = 1;
@@ -108,59 +102,46 @@ typedef struct
 
 bool	zainicjowane = FALSE; //czy juz po initscr() ?
 int	znakSpecjalny = -1; //potrzebne do getch'a
-int	n = 0; //liczba uzytych okienek
 
 short	kolorTekstu = COLOR_WHITE;
 short	kolorTla = COLOR_BLACK;
 short	biezacaPara;
 
-Okno	okienka[MAX_OKIEN];	//tablica struktur aktywnych okienek
 WINDOW*	aktywneOkno = NULL;	//wsk na aktywne okno
-    
-    
 
 // ----------------------------- koniec globalnych ------------
 
 void inicjuj()
 {
-	initscr();
-	start_color(); //wlaczmy kolorki
-	cbreak(); //wylaczmy buforowanie wejscia
-	noecho(); //bez wyswietlania na ekran
-	//raw(); //nadpisywane i tak przez noecho
-	keypad(stdscr, TRUE);
-	scrollok(stdscr, TRUE);
-	
-	//domyslne okno
-	aktywneOkno = stdscr;
-	zainicjowane = TRUE;
-	
-	//utworzmy macierz 8x8 kolorow tla i tekstu
-	short kolor = 1;
-	for(short i=0; i<8; i++)
-	{
-		for(short j=0; j<8; j++, kolor++)
-		{
-			init_pair(kolor,i,j);
-			if(i == COLOR_WHITE && j == COLOR_BLACK)	
-			//ustawmy czarne tlo i bialey tekst jako standard
-			{
-				biezacaPara = kolor;
-			}  
-		}
-	}
-	
-	wrefresh(aktywneOkno);
-}
+    initscr();
+    start_color(); //wlaczmy kolorki
+    cbreak(); //wylaczmy buforowanie wejscia
+    noecho(); //bez wyswietlania na ekran
+    //raw(); //nadpisywane i tak przez noecho
+    keypad(stdscr, TRUE);
+    scrollok(stdscr, TRUE);
 
-int simple_strlen(char* str)
-{
-	char* p;
-	for(p = str; *p != 0; p++);
-	return p-str;
-}
+    //domyslne okno
+    aktywneOkno = stdscr;
+    zainicjowane = TRUE;
 
-int gotoxy(int x, int y);
+    //utworzmy macierz 8x8 kolorow tla i tekstu
+    short kolor = 1;
+    for(short i=0; i<8; i++)
+    {
+        for(short j=0; j<8; j++, kolor++)
+        {
+            init_pair(kolor,i,j);
+            if(i == COLOR_WHITE && j == COLOR_BLACK)
+                //ustawmy czarne tlo i bialey tekst jako standard
+            {
+                biezacaPara = kolor;
+            }
+        }
+    }
+
+    wrefresh(aktywneOkno);
+}
 
 short get_color_attr(void)
 {
@@ -177,6 +158,15 @@ short get_color_attr(void)
         }
     }
 
+    return 0;
+}
+
+int gotoxy(int x, int y)
+{
+    last_x = x;
+    last_y = y;
+    if(!zainicjowane) inicjuj();
+    wmove(aktywneOkno, y - 1, x - 1);
     return 0;
 }
 
@@ -216,164 +206,46 @@ void cputs(char* str)
     attroff(get_color_attr());
 }
 
-char* cgets(char* str)
-{ // nie wiem dokladnie jak dziala orginalna f. cgets bo nie mam
-  // do niej referencji..
-	if(str == NULL || *str == 0)
-	{
-		*(str+1) = 0;
-		return NULL;
-	}
-	
-	int max = (int)(*str);
-	
-	echo();
-	
-	if(wgetnstr(aktywneOkno, (str + 2), max) == ERR)
-	{
-		*(str+1) = 0;
-		return NULL;
-	}
-	
-	noecho();
-	
-	*(str+1) = (char)simple_strlen(str+2);
-	
-	return str+2;
-}
-
-void clreol()
-{
-	wclrtoeol(aktywneOkno);
-	wrefresh(aktywneOkno);
-}
-
 void clrscr()
 {
-	if(!zainicjowane) inicjuj();
-	wbkgd(aktywneOkno, COLOR_PAIR(biezacaPara));
-	//trzeba przesunac kursor? chyba nie...
-	wclear(aktywneOkno);
-}
-
-int cprintf(char *fmt, ...)
-// czysty hardcore ;-)
-{
-	if(!zainicjowane) inicjuj();
-	
-	va_list ap; 
-	va_start(ap, fmt);
-	
-        int i = vwprintw(aktywneOkno,fmt, ap);	//jakie proste ;-)
-	
-	va_end(ap);
-	
-	wrefresh(aktywneOkno);
-	
-	return i;
-}
-
-int cscanf(char *fmt, ...)
-{
-	if(!zainicjowane) inicjuj();
-	
-	echo();
-	
-	va_list ap;
-	va_start(ap, fmt);
-	
-	int i = vwscanw(aktywneOkno, fmt, ap);
-	
-	va_end(ap);
-	
-	wrefresh(aktywneOkno);
-	noecho();
-	
-	return i;
+    if(!zainicjowane) inicjuj();
+    wbkgd(aktywneOkno, COLOR_PAIR(biezacaPara));
+    //trzeba przesunac kursor? chyba nie...
+    wclear(aktywneOkno);
 }
 
 int CURSgetch()
 {
-	if(!zainicjowane) inicjuj();
-	
-	int znak;
-	
-	if(znakSpecjalny>0) //drugi czlon znaku specjalnego 0x00 i 0x??
-	{
-		//zamieniamy znak na kod DOSowy - conio.h
-		znak = znakSpecjalny;
-		znakSpecjalny = -1;
-			
-		return znak-265+59;
-	}
+    if(!zainicjowane) inicjuj();
 
-	znak = wgetch(aktywneOkno);
-	
-	if(znak > 255) //to mamy znak specjalny 0x00
-	{
-		znakSpecjalny = znak;
-		return 0;
-	}
+    int znak;
 
-	return znak;
-}
+    if(znakSpecjalny>0) //drugi czlon znaku specjalnego 0x00 i 0x??
+    {
+        //zamieniamy znak na kod DOSowy - conio.h
+        znak = znakSpecjalny;
+        znakSpecjalny = -1;
 
-int CURSgetche()
-{
-	echo();
-	int znak = getch();
-	noecho();
-	return znak;
-}
+        return znak-265+59;
+    }
 
-int gotoxy(int x, int y)
-{
-        last_x = x;
-        last_y = y;
-	if(!zainicjowane) inicjuj();
-	wmove(aktywneOkno, y - 1, x - 1);
-	return 0;
-}
+    znak = wgetch(aktywneOkno);
 
-int kbhit()
-{
-	int znak;
-	wtimeout(aktywneOkno, 0);
-	znak = wgetch(aktywneOkno);
-	//wtimeout(aktywneOkno, -1);
-	nodelay(aktywneOkno, FALSE);
-	if (znak == ERR) return 0;
-	ungetch(znak);
-	return 1;
-}
+    if(znak > 255) //to mamy znak specjalny 0x00
+    {
+        znakSpecjalny = znak;
+        return 0;
+    }
 
-int putch(int znak)
-{
-	wechochar(aktywneOkno,znak);
+    return znak;
 }
 
 void textbackground(short kolor)
 {
-    kolorTla = kolor%8;
+    kolorTla = kolor % 8;
 }
 
 void textcolor(short kolor)
 {
-    kolorTekstu = kolor%8;
-}
-
-int wherex(void)
-{
-	if(!zainicjowane) inicjuj();
-	int x, y;
-	getyx(aktywneOkno, y, x);
-	return x + 1;
-}
-
-int wherey(void)
-{
-	if(!zainicjowane) inicjuj();
-	int x, y;
-	getyx(aktywneOkno, y, x);
-	return y + 1;
+    kolorTekstu = kolor % 8;
 }

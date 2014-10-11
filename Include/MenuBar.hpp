@@ -86,7 +86,7 @@ void MenuBar::add(Menu &initMenu)
 void MenuBar::drawGrund()
 {
 //Den tomma gråa raden
-	char tom[81];
+	char tom[COLUMNS+1];
 	for(int i = 0; i < getWidth(); i++)
 		tom[i] = ' ';
 	tom[getWidth()] = '\0';

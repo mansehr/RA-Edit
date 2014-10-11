@@ -115,9 +115,9 @@ CHAR getch (VOID)
 
   while(ReadConsoleInputA (hStdin, &irInputRecord, 1, &dwEventsRead)) /* Read key press */
     if (irInputRecord.EventType == KEY_EVENT
-	/*&&irInputRecord.Event.KeyEvent.wVirtualKeyCode != VK_SHIFT
+	&&irInputRecord.Event.KeyEvent.wVirtualKeyCode != VK_SHIFT
 	&&irInputRecord.Event.KeyEvent.wVirtualKeyCode != VK_MENU
-	&&irInputRecord.Event.KeyEvent.wVirtualKeyCode != VK_CONTROL*/)
+	&&irInputRecord.Event.KeyEvent.wVirtualKeyCode != VK_CONTROL)
     {
       cChar = irInputRecord.Event.KeyEvent.uChar.AsciiChar;
       if(cChar == 0) {

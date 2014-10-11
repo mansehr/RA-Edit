@@ -1,5 +1,5 @@
-#ifndef __Constvars.hpp__
-#define __Constvars.hpp__
+#ifndef __Constvarshpp__
+#define __Constvarshpp__
 
 // Definera olika rambitar
 const char LUCORNER	= char(201);

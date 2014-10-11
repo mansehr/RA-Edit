@@ -36,7 +36,7 @@ void textbackground(int bgcolor) {
 	setColor(color);
 }
 
-int lastX, lastY;
+int last_x, last_y;
 void gotoxy(int x, int y) {
 	if(x < 1) {
 		x = 1;
@@ -48,8 +48,8 @@ void gotoxy(int x, int y) {
 	COORD coord = {x-1, y-1};
  	//Set the position
  	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
- 	lastX = x;
- 	lastY = y;
+ 	last_x = x;
+ 	last_y = y;
  	return;
 }
 
@@ -70,19 +70,33 @@ void clrscr() {
     SetConsoleCursorPosition(console, topLeft);
 }
 
-void cputs(char* out) {
-	char ch;
-	do {
-		ch = *out;
-		if(ch == '\n') {
-			gotoxy(lastX, lastY+1);
-		} else if(ch == '\r' || ch == '\b') {
-			// ignore
-		} else if(ch != '\0') {
-			printf("%c", ch);
-		}
-		++out;
-	} while(ch != '\0');
+void cputs(char* str)
+{
+    int beginning_x = last_x;
+
+    while (*str != '\0')
+    {
+        if (*str == '\n')
+        {
+            gotoxy(last_x, last_y+1);
+        }
+        else if (*str == '\r')
+        {
+            gotoxy(beginning_x, last_y);
+        }
+        else if (*str == '\b')
+        {
+            gotoxy(last_x-1, last_y);
+        }
+        else
+        {
+            printf("%c", *str);
+
+            gotoxy(last_x+1, last_y);
+        }
+
+        str++;
+    }
 }
 
 bool hasSpecialChar = false;
